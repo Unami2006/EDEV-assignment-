@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Doctor Dashboard | ClinAssist AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">← Home</a>
+  <h2>Doctor Dashboard</h2>
+ <button onclick="patientLogout()">Logout</button>
+</nav>
+
+<div class="info-banner">
+  <strong>How It Works:</strong>
+  <ul>
+    <li>Patients submit symptom summaries and appointment requests.</li>
+    <li>Doctors review submissions in real time.</li>
+    <li>Appointments can be approved or rescheduled.</li>
+    <li>Consultations generate structured SOAP documentation.</li>
+  </ul>
+</div>
+
+<section class="dashboard-container">
+
+  <!-- LEFT SIDE -->
+  <div class="consultation-panel">
+
+    <div class="card">
+      <h3>New Consultation</h3>
+
+      <div class="mode-toggle">
+        <button id="typeModeBtn" class="active" onclick="setMode('type')">📝 Type</button>
+        <button id="voiceModeBtn" onclick="setMode('voice')">🎤 Voice AI</button>
+      </div>
+
+      <textarea id="doctorInput" placeholder="Enter consultation notes..."></textarea>
+
+      <div id="voiceStatus" class="voice-status hidden">
+        🎤 Listening...
+      </div>
+
+      <div class="actions">
+        <button onclick="analyzeDoctor()">Analyze Consultation</button>
+      </div>
+
+      <div id="doctorOutput" class="hidden">
+
+        <h4>Structured SOAP Note</h4>
+        <div id="soap" class="output-box"></div>
+
+        <h4>Risk Assessment</h4>
+        <div id="risk"></div>
+
+        <h4>Diagnostic Category</h4>
+        <div id="diagnosis" class="output-box"></div>
+
+        <button class="secondary-btn" onclick="downloadDoctorPDF()">
+  Download Report
+</button>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="activity-panel">
+
+    <div class="card">
+      <h3>📄 Patient Submissions</h3>
+      <p style="color:#94a3b8; font-size:14px; margin-bottom:10px;">
+        Sorted by Risk Priority (High → Low)
+      </p>
+      <div id="patientSubmissions"></div>
+    </div>
+
+    <div class="card">
+      <h3>📅 Appointments</h3>
+      <div id="appointments"></div>
+    </div>
+
+  </div>
+
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+<script type="module" src="firebase.js"></script>
+
+</body>
+</html>
